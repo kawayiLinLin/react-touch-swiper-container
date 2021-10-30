@@ -48,7 +48,7 @@ function useTouchSwiperPage<
       pages[currentIndex + 1],
     ].map((item) => {
       if (item) pageCacheRef.current.set(item[key!], item);
-      
+
       return !item ? null : item[key!];
     });
 
@@ -57,6 +57,7 @@ function useTouchSwiperPage<
     };
 
     return {
+      current,
       pages: renderedPage,
       getPage,
       handleAnimationEndChange: handleChange,
