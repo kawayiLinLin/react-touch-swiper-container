@@ -2,17 +2,27 @@
   "name": "react-touch-swiper-container",
   "version": "1.0.0",
   "description": "A react touch swiper mobile component",
-  "main": "index.js",
+  "main": "./lib/index",
+  "module": "./es/index",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "build": "rc-tools run watch",
     "dev": "rc-tools run server",
     "build-examples": "rm -rf docs & rc-tools run build & mv build docs",
-    "pub-github-pages": "rc-tools run gh-pages"
+    "pub-github-pages": "rc-tools run gh-pages",
+    "pub": "npm publish --registry=https://registry.npmjs.org",
+    "login": "npm login --registry=https://registry.npmjs.org",
+    "postpublish": "git push origin master & git push github master & git push github --tag & git push origin --tag"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/kawayiLinLin/react-touch-swiper-container.git"
   },
+  "homepage": "https://kawayilinlin.github.io/react-touch-swiper-container",
   "config": {
     "port": 8090,
     "entry": [
