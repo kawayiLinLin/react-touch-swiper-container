@@ -2,7 +2,15 @@
 
 一个用于react的滑动切换库
 
+## HomePage
+
+[https://kawayilinlin.github.io/react-touch-swiper-container/](https://kawayilinlin.github.io/react-touch-swiper-container/)
+
 ## 示例 Example
+
++ 在线示例 Online Example
+
+[View in mobile browser：https://kawayilinlin.github.io/react-touch-swiper-container/examples/touch-swiper-container.html](https://kawayilinlin.github.io/react-touch-swiper-container/examples/touch-swiper-container.html)
 
 + 安装
 

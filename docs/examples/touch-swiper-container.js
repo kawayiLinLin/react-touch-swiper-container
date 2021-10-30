@@ -162,6 +162,8 @@ var TouchSwiperContainerDemo = function TouchSwiperContainerDemo() {
   }, function (id) {
     var _a;
 
+    var text = (_a = getPage(id)) === null || _a === void 0 ? void 0 : _a.name;
+    text === 0 && (text = '在移动端左右滑动此文字进行切换');
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         fontSize: 50,
@@ -169,7 +171,7 @@ var TouchSwiperContainerDemo = function TouchSwiperContainerDemo() {
         textAlign: "center",
         lineHeight: "170px"
       }
-    }, (_a = getPage(id)) === null || _a === void 0 ? void 0 : _a.name);
+    });
   }));
 };
 

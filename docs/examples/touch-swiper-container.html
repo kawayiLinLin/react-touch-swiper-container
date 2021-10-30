@@ -310,6 +310,8 @@ const TouchSwiperContainerDemo: React.FC = () =&gt; {
         pages={pages}
       &gt;
         {(id) =&gt; {
+          let text: number | string | undefined = getPage(id)?.name
+          text === 0 &amp;&amp; (text = '在移动端左右滑动此文字进行切换')
           return (
             &lt;div
               style={{
@@ -319,7 +321,7 @@ const TouchSwiperContainerDemo: React.FC = () =&gt; {
                 lineHeight: "170px",
               }}
             &gt;
-              {getPage(id)?.name}
+              {}
             &lt;/div&gt;
           );
         }}
