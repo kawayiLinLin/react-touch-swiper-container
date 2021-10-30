@@ -50,7 +50,7 @@ const TouchSwiperContainerDemo: React.FC = () => {
                 lineHeight: "170px",
               }}
             >
-              {}
+              {text}
             </div>
           );
         }}
