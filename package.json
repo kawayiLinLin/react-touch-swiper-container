@@ -1,0 +1,33 @@
+{
+  "name": "react-touch-swiper-container",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rc-tools run watch",
+    "dev": "rc-tools run server",
+    "build-examples": "rc-tools run build",
+    "pub-github-pages": "rc-tools run gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kawayiLinLin/react-touch-swiper-container.git"
+  },
+  "config": {
+    "port": 8090,
+    "entry": [
+      "./src/index.tsx"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^17.0.10",
+    "@types/react-dom": "^17.0.10",
+    "jest": "^27.3.1",
+    "rc-tools": "^9.6.1-alpha.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  }
+}
