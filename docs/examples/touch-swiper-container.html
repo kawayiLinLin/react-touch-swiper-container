@@ -271,7 +271,6 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
     <div class="highlight"><pre><code language="undefined">// 示例代码
 
-
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
@@ -300,18 +299,28 @@ const TouchSwiperContainerDemo: React.FC = () =&gt; {
     "id"
   );
 
-  const [isShowBackground, setIsShow] = useState(false)
+  const [isShowBackground, setIsShow] = useState(false);
 
   return (
-    &lt;div className={isShowBackground ? 'show-background' : undefined} style={{ width: "100%", height: "100%" }}&gt;
-      &lt;button onClick={() =&gt; setIsShow(!isShowBackground)}&gt;切换展示背景颜色&lt;/button&gt;
+    &lt;div
+      className={isShowBackground ? "show-background" : undefined}
+      style={{ width: "100%", height: "100%" }}
+    &gt;
+      &lt;button onClick={() =&gt; setIsShow(!isShowBackground)}&gt;
+        切换展示背景颜色
+      &lt;/button&gt;
       &lt;TouchSwiperContainer
         onAnimationEnd={handleAnimationEndChange}
         pages={pages}
       &gt;
         {(id) =&gt; {
-          let text: number | string | undefined = getPage(id)?.name
-          text === 0 &amp;&amp; (text = '在移动端左右滑动此文字进行切换')
+          let text: React.ReactNode = getPage(id)?.name;
+          text === 0 &amp;&amp;
+            (text = (
+              &lt;div style={{ fontSize: 30, lineHeight: 170 / 2 + "px" }}&gt;
+                在移动端左右滑动此文字进行切换
+              &lt;/div&gt;
+            ));
           return (
             &lt;div
               style={{

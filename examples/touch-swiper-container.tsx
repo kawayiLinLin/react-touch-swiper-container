@@ -1,6 +1,5 @@
 // 示例代码
 
-
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
@@ -29,18 +28,28 @@ const TouchSwiperContainerDemo: React.FC = () => {
     "id"
   );
 
-  const [isShowBackground, setIsShow] = useState(false)
+  const [isShowBackground, setIsShow] = useState(false);
 
   return (
-    <div className={isShowBackground ? 'show-background' : undefined} style={{ width: "100%", height: "100%" }}>
-      <button onClick={() => setIsShow(!isShowBackground)}>切换展示背景颜色</button>
+    <div
+      className={isShowBackground ? "show-background" : undefined}
+      style={{ width: "100%", height: "100%" }}
+    >
+      <button onClick={() => setIsShow(!isShowBackground)}>
+        切换展示背景颜色
+      </button>
       <TouchSwiperContainer
         onAnimationEnd={handleAnimationEndChange}
         pages={pages}
       >
         {(id) => {
-          let text: number | string | undefined = getPage(id)?.name
-          text === 0 && (text = '在移动端左右滑动此文字进行切换')
+          let text: React.ReactNode = getPage(id)?.name;
+          text === 0 &&
+            (text = (
+              <div style={{ fontSize: 30, lineHeight: 170 / 2 + "px" }}>
+                在移动端左右滑动此文字进行切换
+              </div>
+            ));
           return (
             <div
               style={{

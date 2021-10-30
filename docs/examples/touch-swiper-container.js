@@ -147,7 +147,7 @@ var TouchSwiperContainerDemo = function TouchSwiperContainerDemo() {
       setIsShow = _b[1];
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: isShowBackground ? 'show-background' : undefined,
+    className: isShowBackground ? "show-background" : undefined,
     style: {
       width: "100%",
       height: "100%"
@@ -163,7 +163,12 @@ var TouchSwiperContainerDemo = function TouchSwiperContainerDemo() {
     var _a;
 
     var text = (_a = getPage(id)) === null || _a === void 0 ? void 0 : _a.name;
-    text === 0 && (text = '在移动端左右滑动此文字进行切换');
+    text === 0 && (text = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        fontSize: 30,
+        lineHeight: 170 / 2 + "px"
+      }
+    }, "\u5728\u79FB\u52A8\u7AEF\u5DE6\u53F3\u6ED1\u52A8\u6B64\u6587\u5B57\u8FDB\u884C\u5207\u6362"));
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         fontSize: 50,
