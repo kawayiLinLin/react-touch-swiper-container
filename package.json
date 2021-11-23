@@ -12,6 +12,7 @@
   "scripts": {
     "build": "rc-tools run watch",
     "dev": "rc-tools run server",
+    "test": "jest",
     "build-examples": "rm -rf docs & rc-tools run build & mv build docs",
     "pub-github-pages": "rc-tools run gh-pages",
     "pub": "npm publish --registry=https://registry.npmjs.org",
@@ -29,6 +30,12 @@
       "./src/index.tsx"
     ]
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js"
+    }
+  },
   "keywords": [
     "react",
     "components",
@@ -38,11 +45,18 @@
   "author": "kawayiLinLin",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@testing-library/react": "^12.1.2",
     "@types/react": "^17.0.10",
     "@types/react-dom": "^17.0.10",
+    "babel-jest": "^27.3.1",
     "jest": "^27.3.1",
+    "jest-environment-jsdom": "^27.3.1",
     "rc-tools": "^9.6.1-alpha.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "react-test-renderer": "^17.0.2"
   }
 }
