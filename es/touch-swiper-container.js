@@ -1,24 +1,22 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { usePersistFn } from './hooks';
-import './style.less';
-/** @constant DEFAULT_ANIMATION_TIME 当手从屏幕释放后默认的动画时长 ms */
+"use strict";
 
-var DEFAULT_ANIMATION_TIME = 150;
-/** @constant TIME_OVER_STAMP 判定是否是快速滑动的时长（快速滑动时长阈值） ms */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
-var TIME_OVER_STAMP = 200;
-/** @constant TIME_OVER_DISTANCE 快速滑动时，需要的滑动距离阈值 */
+var _react = _interopRequireWildcard(require("react"));
 
-var TIME_OVER_DISTANCE = 20;
-/** @constant NOT_TIME_OVER_DISTANCE 非快速滑动时，需要的滑动距离阈值 */
+var _config = require("./config");
 
-var NOT_TIME_OVER_DISTANCE = 30;
-/** @constant TRANSFORM_RATE 跟手移动的百分比（以小数呈现），等于1时完全跟手，小于1时更易于滑动，大于1时难以滑动 */
+var _hooks = require("./hooks");
 
-var TRANSFORM_RATE = 1.05;
-/** @constant TRANSFORM_START_CHECK 判断是否需要跟手移动的阈值 px */
+require("./style.less");
 
-var TRANSFORM_START_CHECK = 30;
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 /**
  * @example
  * import TouchSwiperContainer from '@/components/base/touch-swiper-container'
@@ -44,92 +42,91 @@ var TRANSFORM_START_CHECK = 30;
  *  </TouchSwiperContainer>
  * }
  */
-
 var TouchSwiperContainer = function TouchSwiperContainer(props) {
   var _a = props.animationTime,
-      animationTime = _a === void 0 ? DEFAULT_ANIMATION_TIME : _a,
+      animationTime = _a === void 0 ? _config.DEFAULT_ANIMATION_TIME : _a,
       _b = props.hideWhenNotReady,
       hideWhenNotReady = _b === void 0 ? true : _b;
   /** 记录参数的引用 */
 
-  var propsRef = useRef(props);
+  var propsRef = (0, _react.useRef)(props);
   propsRef.current = props;
   /** 初始化前是否隐藏 */
 
-  var _c = useState(hideWhenNotReady),
+  var _c = (0, _react.useState)(hideWhenNotReady),
       isHide = _c[0],
       setIsHide = _c[1];
   /** 记录上一次有效的偏移量，当手指移开时，如果判断不需要切换页面，则用此值还原transform */
 
 
-  var lastTransformRef = useRef(0);
+  var lastTransformRef = (0, _react.useRef)(0);
   /** 记录页面的横向偏移量 */
 
-  var _d = useState(0),
+  var _d = (0, _react.useState)(0),
       transform = _d[0],
       setTransform = _d[1];
   /** 是否应用动画，释放时，需要应用动画 */
 
 
-  var _e = useState(false),
+  var _e = (0, _react.useState)(false),
       isAnimating = _e[0],
       setIsAnimating = _e[1];
   /** 动画性能优化 */
 
 
-  var _f = useState(false),
+  var _f = (0, _react.useState)(false),
       willChange = _f[0],
       setWillChange = _f[1];
   /** 当前展示的三个页面的id或key */
 
 
-  var page = useMemo(function () {
+  var page = (0, _react.useMemo)(function () {
     return props.pages || [0, 1, 2];
   }, [props.pages]);
   /** 当前的激活页，取 page[1] */
 
-  var _g = useState(1),
+  var _g = (0, _react.useState)(1),
       current = _g[0],
       setCurrent = _g[1];
   /** 开始移动后，手指移开前，为true时不会再由其他的规则阻碍移动 */
 
 
-  var isMovingRef = useRef(false);
+  var isMovingRef = (0, _react.useRef)(false);
   /** 如果正在动画中，禁用组件的移动和切换交互 */
 
-  var isSleepingRef = useRef(false);
+  var isSleepingRef = (0, _react.useRef)(false);
   /** 是否禁用切换到上一页 */
 
-  var isPreDisabledRef = useRef(false);
+  var isPreDisabledRef = (0, _react.useRef)(false);
   /** 是否禁用切换到下一页 */
 
-  var isNextDisabledRef = useRef(false);
+  var isNextDisabledRef = (0, _react.useRef)(false);
   /** 手指是否移动到了与初始相反的方向，或有这样的趋势 */
 
-  var isReverseDirectionRef = useRef(null);
+  var isReverseDirectionRef = (0, _react.useRef)(null);
   if (page[0] === null) isPreDisabledRef.current = true;else isPreDisabledRef.current = false;
   if (page[2] === null) isNextDisabledRef.current = true;else isNextDisabledRef.current = false;
   /** 该组件根节点的引用 */
 
-  var rootRef = useRef(null);
+  var rootRef = (0, _react.useRef)(null);
   /** 该组件根节点的宽高记录 */
 
-  var rootNodeRect = useRef({
+  var rootNodeRect = (0, _react.useRef)({
     width: 0,
     height: 0
   });
   /** 记录触摸的时间戳 */
 
-  var startTimeStamp = useRef(0);
+  var startTimeStamp = (0, _react.useRef)(0);
   /** 记录触摸的触点位置 */
 
-  var startPositionRef = useRef({
+  var startPositionRef = (0, _react.useRef)({
     x: 0,
     y: 0
   });
   /** 记录touchmove滑动时的触点位置 */
 
-  var lastPositionRef = useRef({
+  var lastPositionRef = (0, _react.useRef)({
     x: 0,
     y: 0
   });
@@ -137,7 +134,7 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
    * 执行切换页面的操作，当页面切换完毕后，将页面重置为中间，同时page更新，达到页面切换的视觉效果
    */
 
-  var change = usePersistFn(function (type) {
+  var change = (0, _hooks.usePersistFn)(function (type) {
     setCurrent(function (pre) {
       var cur = pre;
       var preIndex = page.findIndex(function (item) {
@@ -175,16 +172,16 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
       return type === 'center' ? pre : cur;
     });
   });
-  var next = useCallback(function () {
+  var next = (0, _react.useCallback)(function () {
     change('next');
   }, [change]);
-  var pre = useCallback(function () {
+  var pre = (0, _react.useCallback)(function () {
     change('pre');
   }, [change]);
-  var center = useCallback(function () {
+  var center = (0, _react.useCallback)(function () {
     change('center');
   }, [change]);
-  var actionAfterCurrentChange = useCallback(function (nextTransform, isCenter, callback) {
+  var actionAfterCurrentChange = (0, _react.useCallback)(function (nextTransform, isCenter, callback) {
     lastTransformRef.current = nextTransform;
     setTransform(nextTransform);
     if (!isCenter) setIsAnimating(true);
@@ -203,9 +200,9 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
       }, animationTime);
     }
   }, [animationTime, center]);
-  var actionAfterCurrentChangeRef = useRef(actionAfterCurrentChange);
+  var actionAfterCurrentChangeRef = (0, _react.useRef)(actionAfterCurrentChange);
   actionAfterCurrentChangeRef.current = actionAfterCurrentChange;
-  var handleTouchEnd = useCallback(function (e) {
+  var handleTouchEnd = (0, _react.useCallback)(function (e) {
     if (!['touchend', 'touchcancel'].includes(e.type)) return;
     if (isSleepingRef.current) return;
     isMovingRef.current = false;
@@ -215,9 +212,9 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
     var absCompare = Math.abs(compare);
     var now = Date.now(); // 快速滑动
 
-    var isTimeOver = now - startTimeStamp.current < TIME_OVER_STAMP; // 距离是否达到阈值
+    var isTimeOver = now - startTimeStamp.current < _config.TIME_OVER_STAMP; // 距离是否达到阈值
 
-    var isDistanceOver = absCompare > (isTimeOver ? TIME_OVER_DISTANCE : NOT_TIME_OVER_DISTANCE);
+    var isDistanceOver = absCompare > (isTimeOver ? _config.TIME_OVER_DISTANCE : _config.NOT_TIME_OVER_DISTANCE);
 
     var back = function back() {
       lastPositionRef.current = {
@@ -249,7 +246,7 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
       back();
     }
   }, [next, pre]);
-  var handleTouchStart = useCallback(function (e) {
+  var handleTouchStart = (0, _react.useCallback)(function (e) {
     if (e.type !== 'touchstart') return;
     if (isSleepingRef.current) return;
     isMovingRef.current = true;
@@ -275,7 +272,7 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
     };
     setWillChange(true);
   }, [handleTouchEnd]);
-  var handleTouchMove = useCallback(function (e) {
+  var handleTouchMove = (0, _react.useCallback)(function (e) {
     if (e.type !== 'touchmove') return;
     if (isSleepingRef.current) return;
     if (!isMovingRef.current) return;
@@ -310,17 +307,17 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
 
 
     var absCompare = Math.abs(compare);
-    if (absCompare < TRANSFORM_START_CHECK && !isMovingRef.current) return;
+    if (absCompare < _config.TRANSFORM_START_CHECK && !isMovingRef.current) return;
     isMovingRef.current = true; // 开始移动
 
-    setTransform(lastTransformRef.current + compare * -1 / TRANSFORM_RATE); // 记录本次位置
+    setTransform(lastTransformRef.current + compare * -1 / _config.TRANSFORM_RATE); // 记录本次位置
 
     lastPositionRef.current = {
       x: x,
       y: y
     };
   }, [handleTouchEnd]);
-  useLayoutEffect(function () {
+  (0, _react.useLayoutEffect)(function () {
     var current = rootRef.current;
 
     if (current) {
@@ -336,19 +333,19 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
       lastTransformRef.current = nextTransform;
       setTransform(nextTransform);
       setIsHide(false);
-      setImmediate(function () {
+      setTimeout(function () {
         var _a, _b;
 
         (_b = (_a = propsRef.current).onReady) === null || _b === void 0 ? void 0 : _b.call(_a);
       });
     }
   }, []);
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     var _a, _b;
 
     (_b = (_a = propsRef.current).onChange) === null || _b === void 0 ? void 0 : _b.call(_a, current);
   }, [current]);
-  return React.createElement("div", {
+  return _react["default"].createElement("div", {
     onTouchStart: handleTouchStart,
     onTouchMove: handleTouchMove,
     onTouchEnd: handleTouchEnd,
@@ -358,7 +355,7 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
       visibility: isHide ? 'hidden' : undefined
     },
     ref: rootRef
-  }, React.createElement("div", {
+  }, _react["default"].createElement("div", {
     className: "touch-swiper-container",
     style: {
       willChange: willChange ? 'transform' : undefined,
@@ -368,11 +365,12 @@ var TouchSwiperContainer = function TouchSwiperContainer(props) {
   }, page.map(function (item, idx) {
     var _a;
 
-    return React.createElement("div", {
+    return _react["default"].createElement("div", {
       key: item === null ? idx : item,
       className: "touch-swiper-page"
     }, (_a = props.children) === null || _a === void 0 ? void 0 : _a.call(props, item, idx));
   })));
 };
 
-export default TouchSwiperContainer;
+var _default = TouchSwiperContainer;
+exports["default"] = _default;

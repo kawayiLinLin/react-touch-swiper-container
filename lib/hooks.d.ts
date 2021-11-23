@@ -5,6 +5,7 @@ interface Pages<Key extends string | number> extends Array<{
 }> {
 }
 declare function useTouchSwiperPage<Key extends string | number, PagesType extends Pages<Key>>(pages: PagesType, key?: Key): {
+    current: number;
     pages: ({ [key in Key]: number; }[NonNullable<Key>] | null)[];
     getPage: (id: number | null) => PagesType[number] | undefined;
     handleAnimationEndChange: (next: number) => void;

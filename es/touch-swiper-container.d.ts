@@ -1,14 +1,6 @@
 import React from 'react';
+import { TouchSwpierContainerProps } from './typings';
 import './style.less';
-export interface Props {
-    hideWhenNotReady?: boolean;
-    animationTime?: number;
-    pages?: (null | number)[];
-    children?: (item: number | null, index: number) => React.ReactNode;
-    onAnimationEnd?(next: number): void;
-    onReady?(): void;
-    onChange?(next: number | null): void;
-}
 /**
  * @example
  * import TouchSwiperContainer from '@/components/base/touch-swiper-container'
@@ -34,5 +26,5 @@ export interface Props {
  *  </TouchSwiperContainer>
  * }
  */
-declare const TouchSwiperContainer: React.FC<Props>;
+declare const TouchSwiperContainer: React.FC<TouchSwpierContainerProps>;
 export default TouchSwiperContainer;

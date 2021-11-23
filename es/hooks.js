@@ -1,11 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+exports.usePersistFn = usePersistFn;
+exports.useTouchSwiperPage = useTouchSwiperPage;
+
+var _react = require("react");
 
 function usePersistFn(fn) {
-  var fnRef = useRef(fn);
-  useEffect(function () {
+  var fnRef = (0, _react.useRef)(fn);
+  (0, _react.useEffect)(function () {
     fnRef.current = fn;
   }, [fn]);
-  var persistFn = useRef();
+  var persistFn = (0, _react.useRef)();
 
   if (!persistFn.current) {
     persistFn.current = function () {
@@ -25,18 +34,18 @@ function usePersistFn(fn) {
 function useTouchSwiperPage(pages, key) {
   key = key !== null && key !== void 0 ? key : "id";
 
-  var _a = useState(0),
+  var _a = (0, _react.useState)(0),
       current = _a[0],
       setCurrent = _a[1];
 
-  var pageCache = useState(function () {
+  var pageCache = (0, _react.useState)(function () {
     return new Map();
   })[0];
-  var pageCacheRef = useRef(pageCache);
+  var pageCacheRef = (0, _react.useRef)(pageCache);
   var handleChange = usePersistFn(function (next) {
     setCurrent(next);
   });
-  var hooksResult = useMemo(function () {
+  var hooksResult = (0, _react.useMemo)(function () {
     var currentIndex = pages.findIndex(function (p) {
       return p[key] === current;
     });
@@ -50,6 +59,7 @@ function useTouchSwiperPage(pages, key) {
     };
 
     return {
+      current: current,
       pages: renderedPage,
       getPage: getPage,
       handleAnimationEndChange: handleChange
@@ -58,8 +68,8 @@ function useTouchSwiperPage(pages, key) {
   return hooksResult;
 }
 
-export { usePersistFn, useTouchSwiperPage };
-export default {
+var _default = {
   usePersistFn: usePersistFn,
   useTouchSwiperPage: useTouchSwiperPage
 };
+exports["default"] = _default;
