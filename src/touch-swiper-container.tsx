@@ -342,7 +342,7 @@ const TouchSwiperContainer: React.FC<TouchSwpierContainerProps> = (props) => {
         lastTransformRef.current = nextTransform
         setTransform(nextTransform)
         setIsHide(false)
-        setImmediate(() => {
+        setTimeout(() => {
             propsRef.current.onReady?.()
         })
     }

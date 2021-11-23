@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`能正常渲染 1`] = `
+<div
+  style="height: 667px;"
+>
+  <div
+    class="touch-swiper"
+    style=""
+  >
+    <div
+      class="touch-swiper-container"
+      style="transform: translateX(NaNpx);"
+    >
+      <div
+        class="touch-swiper-page"
+      />
+      <div
+        class="touch-swiper-page"
+      />
+      <div
+        class="touch-swiper-page"
+      />
+    </div>
+  </div>
+</div>
+`;

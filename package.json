@@ -30,12 +30,6 @@
       "./src/index.tsx"
     ]
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js"
-    }
-  },
   "keywords": [
     "react",
     "components",
@@ -57,6 +51,7 @@
     "rc-tools": "^9.6.1-alpha.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "ts-node": "^10.4.0"
   }
 }
