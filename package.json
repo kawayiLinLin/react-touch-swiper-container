@@ -1,6 +1,6 @@
 {
   "name": "react-touch-swiper-container",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A react touch swiper mobile component",
   "main": "./lib/index",
   "module": "./es/index",
